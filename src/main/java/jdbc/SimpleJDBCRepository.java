@@ -40,7 +40,6 @@ public class SimpleJDBCRepository
 
     public Long createUser(User createdUser)
     {
-        //using Statement
         Long createdUserId = null;
         try
         {
@@ -65,26 +64,10 @@ public class SimpleJDBCRepository
         }
         return createdUserId;
 
-        //using PreparedStatement
-        /*try
-        {
-            st = connection.createStatement();
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(createUserSQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, createdUser.getFirstName());
-            ps.setString(2, createdUser.getFirstName());
-            ps.setInt(3, createdUser.getAge());
-            return (long) ps.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }*/
     }
 
     public User findUserById(Long userId)
     {
-        //using Statement
         User user = null;
 
         try
@@ -111,31 +94,10 @@ public class SimpleJDBCRepository
         }
 
         return user;
-        /*User user = null;
-        try
-        {
-            st = connection.createStatement();
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(findUserByIdSQL);
-            ps.setLong(1, userId);
-            ResultSet resultSet = ps.executeQuery();
-            resultSet.next();
-            user = new User();
-            user.setId(resultSet.getLong("id"));
-            user.setFirstName(resultSet.getString("firstname"));
-            user.setLastName(resultSet.getString("lastname"));
-            user.setAge(resultSet.getInt("age"));
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return user;*/
     }
 
     public User findUserByName(String userName)
     {
-        //using Statement
         User user = null;
 
         try
@@ -162,31 +124,10 @@ public class SimpleJDBCRepository
         }
 
         return user;
-        /*User user = null;
-        try
-        {
-            st = connection.createStatement();
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(findUserByNameSQL);
-            ps.setString(1, userName);
-            ResultSet resultSet = ps.executeQuery();
-            resultSet.next();
-            user = new User();
-            user.setId(resultSet.getLong("id"));
-            user.setFirstName(resultSet.getString("firstname"));
-            user.setLastName(resultSet.getString("lastname"));
-            user.setAge(resultSet.getInt("age"));
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return user;*/
     }
 
     public List<User> findAllUser()
     {
-        //using Statement
         List<User> users = new ArrayList<>();
 
         try
@@ -214,35 +155,10 @@ public class SimpleJDBCRepository
         }
 
         return users;
-
-        //using PrepareStatement
-        /*List<User> users = new ArrayList<>();
-        try
-        {
-            st = connection.createStatement();
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(findAllUserSQL);
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next())
-            {
-                User user = new User();
-                user.setId(resultSet.getLong("id"));
-                user.setFirstName(resultSet.getString("firstname"));
-                user.setLastName(resultSet.getString("lastname"));
-                user.setAge(resultSet.getInt("age"));
-                users.add(user);
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return users;*/
     }
 
     public User updateUser(User updatedUser)
     {
-        //using Statement
         User user = null;
         try
         {
@@ -267,27 +183,10 @@ public class SimpleJDBCRepository
             throwables.printStackTrace();
         }
         return user;
-        /*try
-        {
-            st = connection.createStatement();
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(updateUserSQL);
-            ps.setString(1, updatedUser.getFirstName());
-            ps.setString(2, updatedUser.getFirstName());
-            ps.setInt(3, updatedUser.getAge());
-            ps.setLong(4, updatedUser.getId());
-            ps.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return updatedUser;*/
     }
 
     public void deleteUser(Long userId)
     {
-        //using Statement
         try
         {
             connection = CustomDataSource.getInstance().getConnection();
@@ -299,16 +198,5 @@ public class SimpleJDBCRepository
         {
             throwables.printStackTrace();
         }
-        //using PrepareStatement
-        /*try
-        {
-            ps = connection.prepareStatement(deleteUser);
-            ps.setLong(1, userId);
-            ps.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }*/
     }
 }
